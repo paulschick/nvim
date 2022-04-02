@@ -1,0 +1,11 @@
+require('user.keymappings')
+require('user.options')
+require('user.plugins')
+require('user.autopairs')
+require('user.gitsigns')
+require('user.glow')
+require('user.null-ls')
+require('user.treesitter')
+require('user.lsp')
+
+require('user.colorscheme')
