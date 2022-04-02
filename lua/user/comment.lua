@@ -15,4 +15,13 @@ comment.setup {
     -- Block-comment toggle keymap
     block = '<Leader>bb',
   },
+
+  -- operator-pending mappings in n + v
+  -- so like when you have multiple lines selected
+  opleader = {
+    -- line-comment keymap
+    line = '<Leader>t',
+    -- Block-comment keymap
+    block = '<Leader>bb',
+  },
 }

@@ -5,18 +5,18 @@ if not null_ls_ok then
 end
 
 local form = null_ls.builtins.formatting
--- local diag = null_ls.builtins.diagnostics
+local diag = null_ls.builtins.diagnostics
 
 local sources = {
-	form.stylua,
-	--form.black,
-	--form.prettier,
-	-- form.shfmt.with({
-	--   extra_args = { '-i', '2', '-bn', '-ci', '-sr' },
-	-- }),
-	-- diag.shellcheck,
-	-- diag.markdownlint,
-	-- diag.eslint,
+	form.stylua,          -- Installed through Cargo with Rust
+	form.black,           -- Install locally to python project
+	form.prettier,        -- Install locally to js/ts project and others
+	form.shfmt.with({     -- Installed using go
+	  extra_args = { '-i', '2', '-bn', '-ci', '-sr' },
+	}),
+	diag.shellcheck,      -- Installed with apt (Ubuntu)
+  diag.textlint,        -- Installed with npm
+	diag.eslint,          -- Use locally with js/ts project
 }
 
 null_ls.setup({ sources = sources })
