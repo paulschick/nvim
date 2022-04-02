@@ -48,6 +48,7 @@ end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
+vim.cmd [[set autochdir]]               -- Automatically change directory to where a file is opened
 
 ---- markdown disable folding automatically
 -- vim.cmd('let g:vim_markdown_folding_disabled = 1')

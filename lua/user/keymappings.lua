@@ -100,3 +100,10 @@ keymap('n', '<Leader>md', '<CMD>Glow<CR>', opts)
 -- FTerm
 keymap('n', '<C-t>', '<CMD>lua require("FTerm").toggle()<CR>', opts)
 keymap('t', '<C-t>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
+
+-- Comment
+-- keymap('n', '<C-/>', 'gcc', opts)         -- single line style comment
+-- keymap('v', '<C-/>', 'gcc', opts)         -- single line style comment
+-- keymap('n', '<Leader>bc', 'gbc', opts)    -- block style comment
+-- keymap('v', '<Leader>bc', 'gbc', opts)    -- block style comment
+

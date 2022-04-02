@@ -88,20 +88,7 @@ return packer.startup(function (use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
-  --[[
-      Comments plugin
-      I want to be able to toggle comments, just like an IDE
-
-      Repository:
-      https://github.com/numToStr/Comment.nvim
-
-      gcc - toggle current lin
-      gbc - toggle current line using blockwise comment
-  --]]
   use {
     'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end
   }
 end)
