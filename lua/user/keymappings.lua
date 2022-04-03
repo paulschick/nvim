@@ -104,6 +104,10 @@ keymap("n", "<Leader>md", "<CMD>Glow<CR>", opts)
 keymap("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', opts)
 keymap("t", "<C-t>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
 
+-- Formatting
+-- ALT + SHIFT + F (like vscode) to format the document
+keymap("n", "<M-S-f>", "<CMD>Format<CR>", opts)
+
 -- Comment
 -- keymap('n', '<C-/>', 'gcc', opts)         -- single line style comment
 -- keymap('v', '<C-/>', 'gcc', opts)         -- single line style comment
