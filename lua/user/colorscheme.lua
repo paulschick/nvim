@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
 try
   " colorscheme one
   colorscheme tokyonight
@@ -8,4 +8,4 @@ catch /^Vim\%((\a\+)\)\=:E185/
   " set background=light
   set background=dark
 endtry
-]]
+]])
