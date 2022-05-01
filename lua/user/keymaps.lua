@@ -42,5 +42,8 @@ keymap("n", "<Leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>
 keymap("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
 keymap("n", "<Leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
 
+-- Transparent
+keymap("n", "<Leader>tt", "<cmd>TransparentToggle<CR>", opts)
+
 -- Insert
 keymap("i", "jk", "<Esc>", term_opts)

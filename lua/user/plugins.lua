@@ -58,4 +58,6 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
   use "nvim-treesitter/nvim-treesitter"
+  -- https://github.com/xiyaowong/nvim-transparent
+  use "xiyaowong/nvim-transparent"
 end)
