@@ -4,6 +4,8 @@
 
 ## My Current Configuration
 
+Neovim Version: 0.7.0
+
 This repository should replace your `~/.config/nvim` directory.
 Note that some plugins may only work on Linux.
 
