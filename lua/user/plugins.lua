@@ -48,4 +48,13 @@ return packer.startup(function(use)
     use { "kyazdani42/nvim-tree.lua" }
     use "folke/tokyonight.nvim"
     use "nvim-telescope/telescope.nvim"
+    use {
+    "hrsh7th/nvim-cmp",
+    -- commit = "dbc72290295cfc63075dab9ea635260d2b72f2e5",
+  }
+  use "hrsh7th/cmp-buffer" -- buffer completions
+  use "hrsh7th/cmp-path" -- path completions
+  use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/cmp-nvim-lsp"
 end)

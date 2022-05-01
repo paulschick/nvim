@@ -24,8 +24,14 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<C-Tab>", ":bnext<CR>", opts)
-keymap("n", "<C-S-Tab>", ":bprevious<CR>", opts)
+--keymap("n", "<C-Tab>", ":bnext<CR>", opts)
+--keymap("n", "<C-S-Tab>", ":bprevious<CR>", opts)
+keymap("n", "<Tab>", ":bnext<CR>", opts)
+keymap("n", "<S-Tab>", ":bprev<CR>", opts)
+
+-- Splits
+keymap("n", "<Leader>v", "<C-w>v", opts)
+keymap("n", "<Leader>h", "<C-w>s", opts)
 
 -- NvimTree
 keymap("n", "<Leader>e", ":NvimTreeToggle<CR>", opts)
