@@ -42,6 +42,17 @@ keymap("n", "<Leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>
 keymap("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
 keymap("n", "<Leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
 
+-- Fterm
+keymap("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', opts)
+keymap("t", "<C-t>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
+
+-- Terminal Navigation
+keymap("t", "<C-n>", "<C-\\><C-N>", term_opts)
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
 -- Transparent
 keymap("n", "<Leader>tt", "<cmd>TransparentToggle<CR>", opts)
 

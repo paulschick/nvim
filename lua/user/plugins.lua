@@ -60,4 +60,5 @@ return packer.startup(function(use)
   use "nvim-treesitter/nvim-treesitter"
   -- https://github.com/xiyaowong/nvim-transparent
   use "xiyaowong/nvim-transparent"
+  use "numToStr/FTerm.nvim"
 end)
