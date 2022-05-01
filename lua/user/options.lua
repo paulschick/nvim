@@ -43,3 +43,7 @@ end
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
 vim.cmd([[set autochdir]])
+
+-- Set transparency settings to that of the terminal
+-- https://stackoverflow.com/questions/37712730/set-vim-background-transparent
+vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
