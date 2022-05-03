@@ -8,6 +8,15 @@ local actions = require "telescope.actions"
 telescope.setup {
   defaults = {
 
+    file_ignore_patterns = {
+      "node_modules",
+
+      -- dist, target for Rust
+      -- Modify this as needed
+      "dist",
+      "target",
+    },
+
     -- prompt_prefix = icons.ui.Telescope .. " ",
     selection_caret = " ",
     path_display = { "smart" },
