@@ -1,5 +1,12 @@
 require('nvim-lsp-installer').setup {}
 
+-- adds icons to lsp
+require('lspkind').init({
+  mode = 'symbol_text',
+  present = 'default',
+  symbol_map = {},
+})
+
 local cmp = require 'cmp'
 cmp.setup({
   snippet = {

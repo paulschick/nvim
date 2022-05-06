@@ -1,0 +1,23 @@
+{
+  "name": "nvim",
+  "version": "1.0.0",
+  "description": "![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/paulschick/nvim?include_prereleases)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulschick/nvim.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulschick/nvim/issues"
+  },
+  "homepage": "https://github.com/paulschick/nvim#readme",
+  "dependencies": {
+    "remark": "^14.0.2"
+  }
+}

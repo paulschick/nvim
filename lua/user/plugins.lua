@@ -59,12 +59,17 @@ return packer.startup(function(use)
     }
     use "onsails/lspkind-nvim"
     use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
     use "neovim/nvim-lspconfig"
     use "williamboman/nvim-lsp-installer"
+    use "jose-elias-alvarez/null-ls.nvim"
+
     use "nvim-treesitter/nvim-treesitter"
     -- https://github.com/xiyaowong/nvim-transparent
     use "xiyaowong/nvim-transparent"
     use "numToStr/FTerm.nvim"
+
+    use "numToStr/Comment.nvim"
 
     use 'rust-lang/rust.vim'
     use 'darrikonn/vim-gofmt'
