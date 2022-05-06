@@ -57,9 +57,19 @@ return packer.startup(function(use)
     "hrsh7th/nvim-cmp",
     -- commit = "dbc72290295cfc63075dab9ea635260d2b72f2e5",
     }
+    use "onsails/lspkind-nvim"
     use "hrsh7th/cmp-nvim-lsp"
+    use "neovim/nvim-lspconfig"
+    use "williamboman/nvim-lsp-installer"
     use "nvim-treesitter/nvim-treesitter"
     -- https://github.com/xiyaowong/nvim-transparent
     use "xiyaowong/nvim-transparent"
     use "numToStr/FTerm.nvim"
+
+    use 'rust-lang/rust.vim'
+    use 'darrikonn/vim-gofmt'
+    use 'tomlion/vim-solidity'
+
+    use 'flazz/vim-colorschemes'
+
 end)

@@ -58,3 +58,5 @@ keymap("n", "<Leader>tt", "<cmd>TransparentToggle<CR>", opts)
 
 -- Insert
 keymap("i", "jk", "<Esc>", term_opts)
+
+keymap("n", "<Leader><Space>", ":noh<CR>", opts)
