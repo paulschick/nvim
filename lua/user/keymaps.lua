@@ -42,6 +42,12 @@ keymap("n", "<Leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>
 keymap("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
 keymap("n", "<Leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
 
+-- Kill highlight
+keymap("n", "<Leader><Space>", ":noh<CR>", opts)
+
+-- Open lsp install info panel
+keymap("n", "<Leader>lsp", "<cmd>LspInstallInfo<CR>", opts)
+
 -- Fterm
 keymap("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', opts)
 keymap("t", "<C-t>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
@@ -59,4 +65,3 @@ keymap("n", "<Leader>tt", "<cmd>TransparentToggle<CR>", opts)
 -- Insert
 keymap("i", "jk", "<Esc>", term_opts)
 
-keymap("n", "<Leader><Space>", ":noh<CR>", opts)
