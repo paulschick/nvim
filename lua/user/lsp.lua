@@ -1,3 +1,5 @@
+require('nvim-lsp-installer').setup {}
+
 local cmp = require 'cmp'
 cmp.setup({
   snippet = {
@@ -16,8 +18,9 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-  }, {
     { name = 'buffer' },
+  }, {
+    --{ name = 'buffer' },
   })
 })
 
