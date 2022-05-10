@@ -77,4 +77,6 @@ return packer.startup(function(use)
 
     use 'flazz/vim-colorschemes'
 
+    use 'EdenEast/nightfox.nvim'
+
 end)
