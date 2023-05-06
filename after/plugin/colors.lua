@@ -26,8 +26,9 @@ function ColorMe(color)
 
 		When this is set to 0, then there's no background and neovim is transparent.
 	]]--
-	vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-	vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+    -- Uncomment the following lines for transparent background:
+	--vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+	--vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 end
 
 ColorMe()
