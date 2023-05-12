@@ -1,6 +1,9 @@
 -- Set leader key
 vim.g.mapleader = ' '
 
+-- Remap C-w to leader w
+vim.keymap.set('n', '<leader>w', '<C-w>')
+
 -- Open built-in file explorer
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 
