@@ -2,12 +2,16 @@ local lsp = require('lsp-zero').preset({})
 
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+require('lspconfig').bashls.setup({
+    filetypes = {"sh", "zsh", "bash"},
+})
 
 --'sumneko_lua',
 
 lsp.ensure_installed({
 	'tsserver',
 	'rust_analyzer',
+    'bashls'
 })
 
 local cmp = require('cmp')
