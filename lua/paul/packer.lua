@@ -60,4 +60,12 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        -- https://github.com/numToStr/Comment.nvim
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+
 end)
