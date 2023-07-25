@@ -73,7 +73,7 @@ return require('packer').startup(function(use)
         'epwalsh/obsidian.nvim',
         config = function ()
             require('obsidian').setup({
-                dir = 'C:\\Users\\pauls\\Writing',
+                dir = require('paul/utils/get_home_dir').getWritingFolderPath(),
             })
         end
     }
