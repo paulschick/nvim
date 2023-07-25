@@ -68,4 +68,14 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        -- https://github.com/epwalsh/obsidian.nvim
+        'epwalsh/obsidian.nvim',
+        config = function ()
+            require('obsidian').setup({
+                dir = 'C:\\Users\\pauls\\Writing',
+            })
+        end
+    }
+
 end)
