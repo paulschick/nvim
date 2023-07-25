@@ -15,7 +15,7 @@ vim.opt.smartindent = true
 -- undo functions (like days and stuff)
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
+vim.opt.undodir = 'C:\\Users\\pauls\\.vim\\undodir'
 vim.opt.undofile = true
 
 -- do not highlight search results
