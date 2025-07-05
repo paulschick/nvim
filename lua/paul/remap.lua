@@ -98,3 +98,10 @@ vim.keymap.set('n', '<leader><leader>', function()
     vim.cmd('so')
 end)
 
+--[[
+     Soft wrap lines
+]]--
+vim.keymap.set('n', '<leader>w', function()
+    vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle word wrap" })
+
