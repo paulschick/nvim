@@ -4,8 +4,8 @@ vim.g.mapleader = ' '
 -- Remap C-w to leader w
 vim.keymap.set('n', '<leader>w', '<C-w>')
 
--- Open built-in file explorer
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+-- Open nvim-tree file explorer
+vim.keymap.set('n', '<leader>pv', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer' })
 
 -- Enter normal mode
 vim.keymap.set('i', 'jk', '<Esc>')
@@ -101,7 +101,19 @@ end)
 --[[
      Soft wrap lines
 ]]--
-vim.keymap.set('n', '<leader>w', function()
+vim.keymap.set('n', '<leader>tw', function()
     vim.wo.wrap = not vim.wo.wrap
 end, { desc = "Toggle word wrap" })
+
+--[[
+    Clear search highlighting with Esc
+]]--
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = "Clear search highlight" })
+
+--[[
+    Toggle cheat sheet
+]]--
+vim.keymap.set('n', '<leader>?', function()
+    require('paul.cheatsheet').toggle()
+end, { desc = "Toggle cheat sheet" })
 

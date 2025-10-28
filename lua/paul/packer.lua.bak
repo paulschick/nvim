@@ -1,0 +1,90 @@
+vim.cmd [[packadd packer.nvim]]
+
+return require('packer').startup(function(use)
+	-- Packer can manage itself
+	use 'wbthomason/packer.nvim'
+
+	-- Telescope - Fuzzy finder
+	use {
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.8',
+		requires = { {'nvim-lua/plenary.nvim'} }
+	}
+
+	-- Color scheme
+	use({
+		'rose-pine/neovim',
+		as = 'rose-pine'
+	})
+
+	-- Treesitter - Better syntax highlighting
+	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+
+	-- Undo tree
+	use('mbbill/undotree')
+
+	-- Git integration
+	use('tpope/vim-fugitive')
+
+	-- Git signs in gutter
+	use('lewis6991/gitsigns.nvim')
+
+	-- LSP and completion
+	use {
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v2.x',
+		requires = {
+			-- LSP Support
+			{'neovim/nvim-lspconfig'},
+			{'williamboman/mason.nvim'},
+			{'williamboman/mason-lspconfig.nvim'},
+			-- Completion
+			{'hrsh7th/nvim-cmp'},
+			{'hrsh7th/cmp-nvim-lsp'},
+			{'hrsh7th/cmp-buffer'},
+			{'hrsh7th/cmp-path'},
+			{'hrsh7th/cmp-cmdline'},
+			-- Snippets
+			{'L3MON4D3/LuaSnip'},
+			{'rafamadriz/friendly-snippets'},
+			{'saadparwaiz1/cmp_luasnip'},
+		},
+	}
+
+	-- LSP UI improvements
+	use('onsails/lspkind.nvim')
+	use('j-hui/fidget.nvim')
+
+	-- Autopairs
+	use('windwp/nvim-autopairs')
+
+	-- Indent guides
+	use('lukas-reineke/indent-blankline.nvim')
+
+	-- Statusline
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	}
+
+	-- File explorer
+	use {
+		'nvim-tree/nvim-tree.lua',
+		requires = { 'nvim-tree/nvim-web-devicons' },
+	}
+
+	-- Zen mode
+    use('folke/zen-mode.nvim')
+
+	-- Commenting
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+
+	-- Editorconfig support
+	use('editorconfig/editorconfig-vim')
+
+end)

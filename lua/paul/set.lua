@@ -15,13 +15,22 @@ vim.opt.smartindent = true
 -- undo functions (like days and stuff)
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
+
+-- Create undo directory if it doesn't exist
+local undodir = vim.fn.stdpath('data') .. '/undodir'
+if vim.fn.isdirectory(undodir) == 0 then
+	vim.fn.mkdir(undodir, 'p')
+end
+vim.opt.undodir = undodir
 vim.opt.undofile = true
 
--- do not highlight search results
-vim.opt.hlsearch = false
+-- highlight search results
+vim.opt.hlsearch = true
 -- highlight while searching
 vim.opt.incsearch = true
+-- case insensitive search unless uppercase is used
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 
