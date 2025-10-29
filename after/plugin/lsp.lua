@@ -9,10 +9,23 @@ require("mason-lspconfig").setup({
 		'ts_ls',
 		'rust_analyzer',
 		'bashls',
-		'gopls'
+		'gopls',
+		'marksman'
 	},
 	automatic_installation = true,
 })
+
+-- Install formatters via Mason registry
+local mason_registry = require("mason-registry")
+local function ensure_installed(package_name)
+	if not mason_registry.is_installed(package_name) then
+		local package = mason_registry.get_package(package_name)
+		package:install()
+	end
+end
+
+-- Ensure prettier is installed for Markdown formatting
+ensure_installed("prettier")
 
 -- Setup completion capabilities
 local cmp = require('cmp')
@@ -93,12 +106,21 @@ vim.lsp.config('gopls', {
 	on_attach = on_attach,
 })
 
+vim.lsp.config('marksman', {
+	cmd = { 'marksman', 'server' },
+	filetypes = { 'markdown', 'markdown.mdx' },
+	root_markers = { '.marksman.toml', '.git' },
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
 -- Enable LSP servers
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('bashls')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('gopls')
+vim.lsp.enable('marksman')
 
 -- Setup nvim-cmp
 cmp.setup({
@@ -168,10 +190,23 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function()
 		if not vim.g.format_on_save then return end
 
-		-- Only format if LSP client is attached
-		local clients = vim.lsp.get_clients({ bufnr = 0 })
-		if #clients > 0 then
-			vim.lsp.buf.format({ async = false })
+		local filetype = vim.bo.filetype
+
+		-- Use prettier for Markdown files
+		if filetype == "markdown" then
+			local prettier_path = vim.fn.stdpath("data") .. "/mason/bin/prettier"
+			if vim.fn.executable(prettier_path) == 1 then
+				local bufnr = vim.api.nvim_get_current_buf()
+				local filepath = vim.api.nvim_buf_get_name(bufnr)
+				vim.fn.system(prettier_path .. " --write " .. vim.fn.shellescape(filepath))
+				vim.cmd("edit!")
+			end
+		else
+			-- Use LSP formatting for other files
+			local clients = vim.lsp.get_clients({ bufnr = 0 })
+			if #clients > 0 then
+				vim.lsp.buf.format({ async = false })
+			end
 		end
 	end,
 })

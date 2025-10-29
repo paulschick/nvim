@@ -75,7 +75,23 @@ vim.keymap.set('n', 'Q', '<nop>')
 --vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
 
 vim.keymap.set('n', '<leader>f', function()
-    vim.lsp.buf.format()
+    local filetype = vim.bo.filetype
+
+    -- Use prettier for Markdown files
+    if filetype == "markdown" then
+        local prettier_path = vim.fn.stdpath("data") .. "/mason/bin/prettier"
+        if vim.fn.executable(prettier_path) == 1 then
+            local bufnr = vim.api.nvim_get_current_buf()
+            local filepath = vim.api.nvim_buf_get_name(bufnr)
+            vim.fn.system(prettier_path .. " --write " .. vim.fn.shellescape(filepath))
+            vim.cmd("edit!")
+        else
+            print("prettier not found. Install via :MasonInstall prettier")
+        end
+    else
+        -- Use LSP formatting for other files
+        vim.lsp.buf.format()
+    end
 end)
 
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
