@@ -183,7 +183,7 @@ vim.diagnostic.config({
 })
 
 -- Format on save (with toggle)
-vim.g.format_on_save = true
+vim.g.format_on_save = false
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
