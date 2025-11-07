@@ -10,7 +10,8 @@ require("mason-lspconfig").setup({
 		'rust_analyzer',
 		'bashls',
 		'gopls',
-		'marksman'
+		'marksman',
+        'yamlls'
 	},
 	automatic_installation = true,
 })
