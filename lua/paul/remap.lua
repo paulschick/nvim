@@ -88,6 +88,16 @@ vim.keymap.set('n', '<leader>f', function()
         else
             print("prettier not found. Install via :MasonInstall prettier")
         end
+    elseif filetype == "kotlin" then
+        local ktlint_path = vim.fn.stdpath("data") .. "/mason/bin/ktlint"
+        if vim.fn.executable(ktlint_path) == 1 then
+            local bufnr = vim.api.nvim_get_current_buf()
+            local filepath = vim.api.nvim_buf_get_name(bufnr)
+            vim.fn.system(ktlint_path .. " --format " .. vim.fn.shellescape(filepath))
+            vim.cmd("edit!")
+        else
+            print("ktlint not found. Install via :MasonInstall ktlint")
+        end
     else
         -- Use LSP formatting for other files
         vim.lsp.buf.format()

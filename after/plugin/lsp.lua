@@ -11,7 +11,8 @@ require("mason-lspconfig").setup({
 		'bashls',
 		'gopls',
 		'marksman',
-        'yamlls'
+		'yamlls',
+		'kotlin_language_server',
 	},
 	automatic_installation = true,
 })
@@ -27,6 +28,9 @@ end
 
 -- Ensure prettier is installed for Markdown formatting
 ensure_installed("prettier")
+
+-- Ensure ktlint is installed for Kotlin formatting
+ensure_installed("ktlint")
 
 -- Setup completion capabilities
 local cmp = require('cmp')
@@ -115,6 +119,23 @@ vim.lsp.config('marksman', {
 	on_attach = on_attach,
 })
 
+vim.lsp.config('kotlin_language_server', {
+	cmd = { 'kotlin-language-server' },
+	filetypes = { 'kotlin' },
+	root_markers = { 'settings.gradle', 'settings.gradle.kts', 'build.gradle', 'build.gradle.kts', 'pom.xml', '.git' },
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		kotlin = {
+			compiler = {
+				jvm = {
+					target = "25",
+				},
+			},
+		},
+	},
+})
+
 -- Enable LSP servers
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('bashls')
@@ -122,6 +143,7 @@ vim.lsp.enable('ts_ls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('gopls')
 vim.lsp.enable('marksman')
+vim.lsp.enable('kotlin_language_server')
 
 -- Setup nvim-cmp
 cmp.setup({
@@ -200,6 +222,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 				local bufnr = vim.api.nvim_get_current_buf()
 				local filepath = vim.api.nvim_buf_get_name(bufnr)
 				vim.fn.system(prettier_path .. " --write " .. vim.fn.shellescape(filepath))
+				vim.cmd("edit!")
+			end
+		elseif filetype == "kotlin" then
+			local ktlint_path = vim.fn.stdpath("data") .. "/mason/bin/ktlint"
+			if vim.fn.executable(ktlint_path) == 1 then
+				local bufnr = vim.api.nvim_get_current_buf()
+				local filepath = vim.api.nvim_buf_get_name(bufnr)
+				vim.fn.system(ktlint_path .. " --format " .. vim.fn.shellescape(filepath))
 				vim.cmd("edit!")
 			end
 		else
