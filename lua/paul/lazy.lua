@@ -31,6 +31,7 @@ require("lazy").setup({
 	-- Treesitter - Better syntax highlighting
 	{
 		'nvim-treesitter/nvim-treesitter',
+		branch = 'master',
 		build = ':TSUpdate'
 	},
 
