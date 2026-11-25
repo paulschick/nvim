@@ -116,6 +116,14 @@ local cheatsheet_content = [[
 ║  <TAB>       = Expand to scope                                            ║
 ║  <S-TAB>     = Shrink selection                                           ║
 ║                                                                           ║
+║  MARKDOWN                                                                 ║
+║  ─────────────────────────────────────────────────────────────────────────║
+║  <leader>mr  = Toggle rendering                                           ║
+║  j / k       = Down/up by display line (5j still moves 5 lines)           ║
+║  z=          = Spelling suggestions for word under cursor                 ║
+║  zg          = Add word under cursor to dictionary                        ║
+║  <leader>f   = Format buffer (prettier)                                   ║
+║                                                                           ║
 ║  USEFUL VIM COMMANDS                                                      ║
 ║  ─────────────────────────────────────────────────────────────────────────║
 ║  :Lazy       = Plugin manager (install/update/sync)                       ║
@@ -129,21 +137,7 @@ local cheatsheet_content = [[
 Press 'q' or <Esc> to close this window
 ]]
 
--- Function to create and show the cheat sheet
-function M.toggle()
-    -- Check if cheat sheet buffer already exists
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_name(buf):match("CHEATSHEET") then
-            -- Find and close the window showing this buffer
-            for _, win in ipairs(vim.api.nvim_list_wins()) do
-                if vim.api.nvim_win_get_buf(win) == buf then
-                    vim.api.nvim_win_close(win, true)
-                    return
-                end
-            end
-        end
-    end
-
+local function create_buffer()
     -- Create a new buffer
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_name(buf, "CHEATSHEET")
@@ -158,6 +152,52 @@ function M.toggle()
     vim.bo[buf].buftype = 'nofile'
     vim.bo[buf].swapfile = false
     vim.bo[buf].filetype = 'cheatsheet'
+
+    return buf
+end
+
+local function add_syntax()
+    -- Add syntax highlighting
+    vim.cmd([[
+		syn match CheatsheetHeader "^║.*NEOVIM.*║$"
+		syn match CheatsheetCategory "^║  [A-Z ]*$"
+		syn match CheatsheetSeparator "^║  ────.*$"
+		syn match CheatsheetKey "<[^>]*>"
+		syn match CheatsheetLeader "<leader>"
+		syn match CheatsheetBorder "^[╔╗╚╝═║].*"
+		syn match CheatsheetCommand ":[A-Za-z]*"
+
+		hi CheatsheetHeader guifg=#eb6f92 gui=bold
+		hi CheatsheetCategory guifg=#f6c177 gui=bold
+		hi CheatsheetSeparator guifg=#6e6a86
+		hi CheatsheetKey guifg=#9ccfd8
+		hi CheatsheetLeader guifg=#c4a7e7 gui=bold
+		hi CheatsheetBorder guifg=#908caa
+		hi CheatsheetCommand guifg=#31748f
+	]])
+end
+
+-- Function to create and show the cheat sheet
+function M.toggle()
+    -- Check if cheat sheet buffer already exists
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_name(buf):match("CHEATSHEET") then
+            -- Find and close the window showing this buffer
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+                if vim.api.nvim_win_get_buf(win) == buf then
+                    if vim.api.nvim_win_get_config(win).relative == '' then
+                        -- Home page: may be the last window, so empty it instead
+                        vim.api.nvim_win_call(win, vim.cmd.enew)
+                    else
+                        vim.api.nvim_win_close(win, true)
+                    end
+                    return
+                end
+            end
+        end
+    end
+
+    local buf = create_buffer()
 
     -- Calculate window size (90% of screen)
     local width = math.floor(vim.o.columns * 0.9)
@@ -185,30 +225,39 @@ function M.toggle()
     vim.wo[win].wrap = false
     vim.wo[win].cursorline = true
 
-    -- Add syntax highlighting
-    vim.cmd([[
-		syn match CheatsheetHeader "^║.*NEOVIM.*║$"
-		syn match CheatsheetCategory "^║  [A-Z ]*$"
-		syn match CheatsheetSeparator "^║  ────.*$"
-		syn match CheatsheetKey "<[^>]*>"
-		syn match CheatsheetLeader "<leader>"
-		syn match CheatsheetBorder "^[╔╗╚╝═║].*"
-		syn match CheatsheetCommand ":[A-Za-z]*"
-
-		hi CheatsheetHeader guifg=#eb6f92 gui=bold
-		hi CheatsheetCategory guifg=#f6c177 gui=bold
-		hi CheatsheetSeparator guifg=#6e6a86
-		hi CheatsheetKey guifg=#9ccfd8
-		hi CheatsheetLeader guifg=#c4a7e7 gui=bold
-		hi CheatsheetBorder guifg=#908caa
-		hi CheatsheetCommand guifg=#31748f
-	]])
+    add_syntax()
 
     -- Keymaps to close the window
     local opts_map = { noremap = true, silent = true, buffer = buf }
     vim.keymap.set('n', 'q', '<cmd>close<CR>', opts_map)
     vim.keymap.set('n', '<Esc>', '<cmd>close<CR>', opts_map)
     vim.keymap.set('n', '<leader>?', '<cmd>close<CR>', opts_map)
+end
+
+-- Show the cheat sheet in the current window, in place of the empty start buffer
+function M.home()
+    local start_buf = vim.api.nvim_get_current_buf()
+    local buf = create_buffer()
+    vim.bo[start_buf].bufhidden = 'wipe'
+    vim.api.nvim_win_set_buf(0, buf)
+
+    -- Local to this buffer, so files opened in this window keep their defaults
+    local wo = vim.wo[0][0]
+    wo.number = false
+    wo.relativenumber = false
+    wo.signcolumn = 'no'
+    wo.colorcolumn = ''
+    wo.wrap = false
+    wo.cursorline = true
+
+    add_syntax()
+
+    -- This may be the only window, so leave by opening an empty buffer
+    local opts_map = { silent = true, buffer = buf }
+    for _, key in ipairs({ 'q', '<Esc>' }) do
+        vim.keymap.set('n', key, '<cmd>enew<CR>', opts_map)
+    end
+    vim.keymap.set('n', 'i', '<cmd>enew<CR><cmd>startinsert<CR>', opts_map)
 end
 
 return M

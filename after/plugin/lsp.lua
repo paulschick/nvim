@@ -210,28 +210,16 @@ vim.g.format_on_save = false
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
-	callback = function()
+	callback = function(args)
 		if not vim.g.format_on_save then return end
 
 		local filetype = vim.bo.filetype
 
 		-- Use prettier for Markdown files
 		if filetype == "markdown" then
-			local prettier_path = vim.fn.stdpath("data") .. "/mason/bin/prettier"
-			if vim.fn.executable(prettier_path) == 1 then
-				local bufnr = vim.api.nvim_get_current_buf()
-				local filepath = vim.api.nvim_buf_get_name(bufnr)
-				vim.fn.system(prettier_path .. " --write " .. vim.fn.shellescape(filepath))
-				vim.cmd("edit!")
-			end
+			require('paul.format').prettier(args.buf)
 		elseif filetype == "kotlin" then
-			local ktlint_path = vim.fn.stdpath("data") .. "/mason/bin/ktlint"
-			if vim.fn.executable(ktlint_path) == 1 then
-				local bufnr = vim.api.nvim_get_current_buf()
-				local filepath = vim.api.nvim_buf_get_name(bufnr)
-				vim.fn.system(ktlint_path .. " --format " .. vim.fn.shellescape(filepath))
-				vim.cmd("edit!")
-			end
+			require('paul.format').ktlint(args.buf)
 		else
 			-- Use LSP formatting for other files
 			local clients = vim.lsp.get_clients({ bufnr = 0 })

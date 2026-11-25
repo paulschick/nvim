@@ -87,6 +87,12 @@ require("lazy").setup({
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 	},
 
+	-- Markdown rendering
+	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+	},
+
 	-- Zen mode
 	'folke/zen-mode.nvim',
 

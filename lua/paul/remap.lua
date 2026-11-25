@@ -1,6 +1,3 @@
--- Set leader key
-vim.g.mapleader = ' '
-
 -- Remap C-w to leader w
 vim.keymap.set('n', '<leader>w', '<C-w>')
 
@@ -79,25 +76,9 @@ vim.keymap.set('n', '<leader>f', function()
 
     -- Use prettier for Markdown files
     if filetype == "markdown" then
-        local prettier_path = vim.fn.stdpath("data") .. "/mason/bin/prettier"
-        if vim.fn.executable(prettier_path) == 1 then
-            local bufnr = vim.api.nvim_get_current_buf()
-            local filepath = vim.api.nvim_buf_get_name(bufnr)
-            vim.fn.system(prettier_path .. " --write " .. vim.fn.shellescape(filepath))
-            vim.cmd("edit!")
-        else
-            print("prettier not found. Install via :MasonInstall prettier")
-        end
+        require('paul.format').prettier(vim.api.nvim_get_current_buf())
     elseif filetype == "kotlin" then
-        local ktlint_path = vim.fn.stdpath("data") .. "/mason/bin/ktlint"
-        if vim.fn.executable(ktlint_path) == 1 then
-            local bufnr = vim.api.nvim_get_current_buf()
-            local filepath = vim.api.nvim_buf_get_name(bufnr)
-            vim.fn.system(ktlint_path .. " --format " .. vim.fn.shellescape(filepath))
-            vim.cmd("edit!")
-        else
-            print("ktlint not found. Install via :MasonInstall ktlint")
-        end
+        require('paul.format').ktlint(vim.api.nvim_get_current_buf())
     else
         -- Use LSP formatting for other files
         vim.lsp.buf.format()

@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>zz", function()
         },
     }
     require("zen-mode").toggle()
-    vim.wo.wrap = false
+    vim.wo.wrap = vim.bo.filetype == 'markdown'
     vim.wo.number = true
     vim.wo.rnu = true
     ColorMe()
@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>zZ", function()
         },
     }
     require("zen-mode").toggle()
-    vim.wo.wrap = false
+    vim.wo.wrap = vim.bo.filetype == 'markdown'
     vim.wo.number = false
     vim.wo.rnu = false
     vim.opt.colorcolumn = "0"
