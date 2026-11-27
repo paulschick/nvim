@@ -119,6 +119,8 @@ local cheatsheet_content = [[
 ║  MARKDOWN                                                                 ║
 ║  ─────────────────────────────────────────────────────────────────────────║
 ║  <leader>mr  = Toggle rendering                                           ║
+║  <leader>m=  = Widen centered column                                      ║
+║  <leader>m-  = Narrow centered column                                     ║
 ║  j / k       = Down/up by display line (5j still moves 5 lines)           ║
 ║  z=          = Spelling suggestions for word under cursor                 ║
 ║  zg          = Add word under cursor to dictionary                        ║

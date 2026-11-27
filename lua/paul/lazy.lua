@@ -93,6 +93,9 @@ require("lazy").setup({
 		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
 	},
 
+	-- Centers markdown in a narrower column (see after/plugin/no-neck-pain.lua)
+	{ 'shortcuts/no-neck-pain.nvim', version = '*' },
+
 	-- Zen mode
 	'folke/zen-mode.nvim',
 
